@@ -1,35 +1,48 @@
 import React from "react";
 import "./App.css";
 
-function Header() {
+function Header(props) {
+  console.log(props);
   return (
     <header>
-      <h1>Eve's Kitchen</h1>
+      <h1>{props.name}'s Kitchen</h1>
     </header>
   );
 }
 
-function Main() {
+function Main(props) {
   return (
     <section>
-      <p>We serve the vegan most delicious food</p>
+      <p>We serve the vegan most {props.adjective} food</p>
+      <ul style={{ textAlign: "left" }}>
+        {props.dishes.map((dish) => (
+          <li>{dish}</li>
+        ))}
+      </ul>
     </section>
   );
 }
 
-function Footer() {
+function Footer(props) {
   return (
     <footer>
-      <p>It's true.</p>
+      <p>Copyrights {props.year}</p>
     </footer>
   );
 }
+
+const dishes = [
+  "Spaghetty with pumpkin and pores",
+  "Mushroom soup",
+  "Apple pie",
+];
+
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Main />
-      <Footer />
+      <Header name="Mike" />
+      <Main adjective="amazing" dishes={dishes} />
+      <Footer year={new Date().getFullYear()} />
     </div>
   );
 }
